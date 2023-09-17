@@ -1,5 +1,6 @@
 #include <iostream>
 #include <pigpiod_if2.h>
+#include "servo_data.h"
 
 #define SERVO_PIN	4
 
@@ -13,15 +14,15 @@ int main()
 	set_PWM_frequency(pi, SERVO_PIN, 50);
 
 	std::cout << "Setting servo to 0 degrees..." << std::endl;
-	set_PWM_dutycycle(pi, SERVO_PIN, 6);
+	set_PWM_dutycycle(pi, SERVO_PIN, SERVO_MIN);
 	time_sleep(3);
 
 	std::cout << "Setting servo to 90 degrees..." << std::endl;
-	set_PWM_dutycycle(pi, SERVO_PIN, 17);
+	set_PWM_dutycycle(pi, SERVO_PIN, SERVO_MID);
 	time_sleep(3);
 
 	std::cout << "Setting servo to 180 degrees..." << std::endl;
-	set_PWM_dutycycle(pi, SERVO_PIN, 30);
+	set_PWM_dutycycle(pi, SERVO_PIN, SERVO_MAX);
 	time_sleep(3);
 
 	pigpio_stop(pi);
