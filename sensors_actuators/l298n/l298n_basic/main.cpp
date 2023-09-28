@@ -1,6 +1,7 @@
 #include <iostream>
 #include <pigpiod_if2.h>
 
+//	l298n pins
 #define MOTOR_1_SPEED   21
 #define MOTOR_1_IN1     26
 #define MOTOR_1_IN2     13
@@ -22,8 +23,35 @@ int main()
 	uint16_t motorspeed, timesec;
 	char direction;
 
-	std::cout << "Choose direction. 'f' for forwards, 'b' for backwards." << std::endl;
+	std::cout << "Choose direction. 'f' for forwards, 'b' for backwards, 's' for forward speed sweep." << std::endl;
 	std::cin >> direction;
+
+	if(direction == 's')
+	{
+		std::cout << "Robot is now moving forward and sweeping speed values between 0 and 255." << std::endl;
+		uint8_t i, j;
+		for(j = 0; j<5; j++)
+		{
+			for(i = 0; i<255; i++)
+			{
+				motors_forward(i);
+				time_sleep(0.05);
+			}
+			for(i = 255; i>0; i--)
+			{
+				motors_forward(i);
+				time_sleep(0.05);
+			}
+		}
+
+		std::cout << "Manuever complete." << std::endl;
+
+		motors_zero();
+
+		pigpio_stop(pi);
+
+		return 0;
+	}
 
 	std::cout << "Choose speed. Enter an integer value betwee 0 and 255." << std::endl;
 	std::cin >> motorspeed;
@@ -36,14 +64,14 @@ int main()
 		std::cout << "Robot is now moving forward at speed " << motorspeed << " for " << timesec << " seconds." << std::endl;
 		motors_forward(motorspeed);
 		time_sleep(timesec);
-        std::cout << "Manuever complete." << std::endl;
+        	std::cout << "Manuever complete." << std::endl;
 	}
 	else if(direction == 'b')
 	{
 		std::cout << "Robot is now moving backward at speed " << motorspeed << " for " << timesec << " seconds." << std::endl;
 		motors_backward(motorspeed);
 		time_sleep(timesec);
-        std::cout << "Manuever complete." << std::endl;
+        	std::cout << "Manuever complete." << std::endl;
 	}
 	else
 	{
@@ -71,7 +99,7 @@ void pi_init(void)
 	set_mode(pi, MOTOR_1_IN2, PI_OUTPUT);
 	set_mode(pi, MOTOR_2_SPEED, PI_OUTPUT);
 	set_mode(pi, MOTOR_2_IN3, PI_OUTPUT);
-	set_mode(pi, MOTOR_2_IN4, PI_OUTPUT);
+	set_mode(pi, MOTOR_2_IN4, PI_OUTPUT);	
 
 	//	initialize motors to be off
 	motors_zero();
