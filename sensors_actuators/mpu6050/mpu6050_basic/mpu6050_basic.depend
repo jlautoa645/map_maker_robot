@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1695015851 source:/home/jeremy/Documents/map_maker_robot/sensors_actuators/mpu6050/mpu6050_basic/main.cpp
+	<iostream>
+	<pigpiod_if2.h>
+
