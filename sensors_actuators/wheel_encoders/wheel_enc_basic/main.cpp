@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <pigpiod_if2.h>
 
 //	encoder pins
@@ -53,7 +54,7 @@ int main()
 				distance_m = revolutions * WHEEL_CIRCUMFERENCE;		// calculate the distance in meters
 				distance_ft = distance_m * FT_PER_M;			// convert the distance measurement to feet
 
-				std::cout << "Total distance traveled: " << distance_m << "m, " << distance_ft << "ft" << std::endl;
+				std::cout << std::setprecision(3) << "Total distance traveled: " << distance_m << "m, " << distance_ft << "ft" << std::endl;
 
 				pulses = 0;						// set pulses equal to 0 to repeat the loop
 			}
