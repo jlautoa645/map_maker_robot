@@ -1,6 +1,6 @@
-This subdirectory contains code to read information from the wheel encoders on the DC gear motors for odemetry data
+This subdirectory contains code to read information from the wheel encoders on the DC gear motors for odometry data
 
-For this project I am using these JGA25-371 gear motors from Amazon:
-https://www.amazon.com/dp/B07X5P1584?psc=1&ref=ppx_yo2ov_dt_b_product_details
+This robot utilizes two JGA25-371 gear motors
 
-![wheel_encoders](https://github.com/jlautoa645/map_maker_robot/assets/121917210/c14c33b2-3f3b-44b4-b217-27c5bf506be7)
+![IMG_2521](https://github.com/jlautoa645/map_maker_robot/assets/121917210/59520460-5dcf-47c7-a5f4-9d799c424d55)
+
