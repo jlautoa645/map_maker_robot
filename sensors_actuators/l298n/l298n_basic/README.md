@@ -1,5 +1,5 @@
 This program: 
-- Prompts a user to input three parameters: Direction, speed, time
+- Prompts a user to input three parameters: direction, speed, time
 - moves the robot according to these parameters
 
 
