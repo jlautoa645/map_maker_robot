@@ -1,6 +1,6 @@
 This program: 
 - Prompts a user to input three parameters: direction, speed, time
-- Moves the robot according to these parameters
+- Moves the robot by generating the appropriate pwm signal for the provided amount of time
 
 **Moving forward at ~86% speed example:**
 - Terminal Input/Output 
