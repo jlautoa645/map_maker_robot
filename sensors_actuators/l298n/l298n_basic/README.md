@@ -14,9 +14,9 @@ https://github.com/jlautoa645/map_maker_robot/assets/121917210/58b02bbc-cf94-4a4
 
 
 **Moving backward at 100% speed example:**
-- Terminal Input/Output 
-![l298n_basic_io_2](https://github.com/jlautoa645/map_maker_robot/assets/121917210/97998114-3c26-4162-ab15-d858410fbb3e)
+- Terminal Input/Output
 
+![l298n_basic_io_2](https://github.com/jlautoa645/map_maker_robot/assets/121917210/97998114-3c26-4162-ab15-d858410fbb3e)
 - Video
   
 https://github.com/jlautoa645/map_maker_robot/assets/121917210/9defe6dc-74b4-4643-a5a8-54e928d9543c
