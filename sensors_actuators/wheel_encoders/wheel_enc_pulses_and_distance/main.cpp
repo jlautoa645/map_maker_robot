@@ -1,14 +1,11 @@
 #include <iostream>
 #include <iomanip>
 #include <pigpiod_if2.h>
+#include "jga25371.hpp"
 
-//	encoder pins
-#define MOTOR_ENC_A		25
-#define MOTOR_ENC_B		24
-
-const float PULSES_PER_REVOLUTION = 176.3;
-const float WHEEL_CIRCUMFERENCE = 0.21;		// meters
-const float FT_PER_M = 3.28;
+//	encoder signals. for this sketch we will use the motor 1 encoder signals
+#define MOTOR_ENC_A	MOTOR_1_ENC_A
+#define MOTOR_ENC_B	MOTOR_1_ENC_B
 
 int pi;
 int pulses = 0;
