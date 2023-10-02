@@ -5,16 +5,13 @@
 #define ECHO_PIN    22
 
 int pi;
-int t1, t2;
 
 void pi_init(void);
-void echo_rising_cb(int pi, unsigned int user_gpio, unsigned int level, uint32_t tick);
-void echo_falling_cb(int pi, unsigned int user_gpio, unsigned int level, uint32_t tick);
 
 int main()
 {
-    	int dt;
-    	double d_in, d_cm;
+    	int t1, t2, dt;					// variables will store system ticks (microseconds)
+    	float d_in, d_cm;				// variables will store distance measurements
 
 	pi_init();
 
@@ -24,12 +21,17 @@ int main()
 		time_sleep(1);
 	}
 
-	gpio_trigger(pi, TRIG_PIN, 10, 1);
-	time_sleep(0.02);
-	dt = t2 - t1;
+	gpio_trigger(pi, TRIG_PIN, 10, 1);		// provide trigger signal
+	
+	while(gpio_read(pi, ECHO_PIN) == 0){}		// wait for echo to transition to high
+	t1 = get_current_tick(pi);			// get the current time at the transition
+	while(gpio_read(pi, ECHO_PIN) == 1){}		// wait for echo to transition to low
+	t2 = get_current_tick(pi);			// get the current time at the transition
 
-	d_cm = (dt / 2) * 0.0343;
-	d_in = d_cm / 2.54;
+	dt = t2 - t1;					// calculate the time duration of the echo signal
+
+	d_cm = (dt / 2) * 0.0343;			// calculate distance in centimeters
+	d_in = d_cm / 2.54;				// calculate distance in inches
 
 	std::cout << "Inches: " << d_in << ", Cm: " << d_cm << std::endl;
 
@@ -53,18 +55,4 @@ void pi_init(void)
 
 	// initialize trig pin to output 0
 	gpio_write(pi, TRIG_PIN, 0);
-
-	// initialize callbacks
-	int echo_rise = callback(pi, ECHO_PIN, RISING_EDGE, echo_rising_cb);
-	int echo_fall = callback(pi, ECHO_PIN, FALLING_EDGE, echo_falling_cb);
-}
-
-void echo_rising_cb(int pi, unsigned int user_gpio, unsigned int level, uint32_t tick)
-{
-	t1 = get_current_tick(pi);
-}
-
-void echo_falling_cb(int pi, unsigned int user_gpio, unsigned int level, uint32_t tick)
-{
-	t2 = get_current_tick(pi);
 }
