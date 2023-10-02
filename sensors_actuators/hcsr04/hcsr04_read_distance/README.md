@@ -4,7 +4,7 @@ This sketch measures distance once using the hcsr04. It works by sending a trigg
 
 Here are the waveforms for the signals sent to and from the hcsr04
 
-- On the top is the trigger signal. It is a 10 microsecond pulse sent from the rasperry pi to the hcsr04 module. After the hcsr04 receives the signal, it will send a sound wave that will bounce off of the nearest object and reflect back to the sensor.
+- On the top is the trigger signal. It is a 10 microsecond pulse sent from the raspberry pi to the hcsr04 module. After the hcsr04 receives the signal, it will send a sound wave that will bounce off of the nearest object and reflect back to the sensor.
 
 - On the bottom is the echo signal. After the sensor sends the sound wave, it pulls the echo pin high, and when the wave returns to the sensor it pulls the signal low. We can use the amount of time that the echo pin is high to calculate the distance of the nearest object.
 
