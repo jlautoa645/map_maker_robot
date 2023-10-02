@@ -5,40 +5,35 @@
 #define ECHO_PIN    22
 
 int pi;
+int t1, t2;
 
 void pi_init(void);
+void echo_rising_cb(int pi, unsigned int user_gpio, unsigned int level, uint32_t tick);
+void echo_falling_cb(int pi, unsigned int user_gpio, unsigned int level, uint32_t tick);
 
 int main()
 {
-    int t1, t2, dt;
-    double d_in, d_cm;
+    	int dt;
+    	double d_in, d_cm;
 
 	pi_init();
 
-    while(1)
-    {
-        for(int i = 3; i>0; i--)
-        {
-            std::cout << "Sampling in " << i << " seconds... " << std::endl;
-            time_sleep(1);
-        }
+   	for(int i = 3; i>0; i--)
+	{
+		std::cout << "Sending in: " << i << std::endl;
+		time_sleep(1);
+	}
 
-        gpio_trigger(pi, TRIG_PIN, 10, 1);
+	gpio_trigger(pi, TRIG_PIN, 10, 1);
+	time_sleep(0.02);
+	dt = t2 - t1;
 
-        while(gpio_read(pi, ECHO_PIN) == 0){}
-        t1 = get_current_tick(pi);
-        while(gpio_read(pi, ECHO_PIN) == 1){}
-        t2 = get_current_tick(pi);
+	d_cm = (dt / 2) * 0.0343;
+	d_in = d_cm / 2.54;
 
-        dt = t2 - t1;    //microseconds
+	std::cout << "Inches: " << d_in << ", Cm: " << d_cm << std::endl;
 
-        d_cm = (dt/2)*0.0343;
-        d_in = d_cm / 2.54;
-
-        std::cout << "time: " << dt << " microseconds." << std::endl;
-        std::cout << "inches: " << d_in << std::endl;
-        std::cout << "centimeters: " << d_cm << std::endl;
-    }
+	while(1){}
 
 	pigpio_stop(pi);
 
@@ -52,8 +47,24 @@ void pi_init(void)
 
 	pi = pigpio_start(addr_str, port_str);
 
+	// set pin directions
 	set_mode(pi, TRIG_PIN, PI_OUTPUT);
 	set_mode(pi, ECHO_PIN, PI_INPUT);
 
+	// initialize trig pin to output 0
 	gpio_write(pi, TRIG_PIN, 0);
+
+	// initialize callbacks
+	int echo_rise = callback(pi, ECHO_PIN, RISING_EDGE, echo_rising_cb);
+	int echo_fall = callback(pi, ECHO_PIN, FALLING_EDGE, echo_falling_cb);
+}
+
+void echo_rising_cb(int pi, unsigned int user_gpio, unsigned int level, uint32_t tick)
+{
+	t1 = get_current_tick(pi);
+}
+
+void echo_falling_cb(int pi, unsigned int user_gpio, unsigned int level, uint32_t tick)
+{
+	t2 = get_current_tick(pi);
 }
