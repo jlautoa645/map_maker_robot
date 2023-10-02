@@ -3,6 +3,10 @@ This sketch reads the encoder signals and determines:
 - Pulses read from the wheel encoders each second
 - Total distance traveled
 
+- Here are the channel A signals (top) and channel B signals (bottom) from wheel encoder pins. The pulses are counted at the rising edge and used to determine amount of revolutions.
+![wheel_enc](https://github.com/jlautoa645/map_maker_robot/assets/121917210/3199eb01-3618-4c26-b42e-13a377537c6a)
+
+
 **Example**
 
 To demonstrate the functionality of the program, I will place the robot on a measured piece of tape, use the l298n_move_for_seconds sketch to move the robot, and this program will measure the distance traveled by the robot using the wheel encoders.
