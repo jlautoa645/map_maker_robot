@@ -1,4 +1,12 @@
-This subdirectory contains code to interface with the sensors and actuators on my robot.
-Examples include MPU6050 IMU, HCSR04 Ultrasonic Distance Sensor, DC Motor Encoders, and more.
+This subdirectory contains code to interface with all of the sensors and actuators of the robot.
 
-- Uses the same pigpio library as the rpi_gpio subdirectory: https://abyz.me.uk/rpi/pigpio/pdif2.html
+**Sensors**
+- hcsr04 ultrasonic distance sensor (distance)
+- mpu6050 6-axis inertial measurement unit (accelerometer, gyroscope)
+- jga25-371 wheel encoders (odometry)
+
+**Actuators**
+- sg90 servo motor (servo)
+- l298n motor driver (dc motors)
+
+![IMG_2531](https://github.com/jlautoa645/map_maker_robot/assets/121917210/266ebceb-eab2-4595-b8d1-06da83dbbc7d)
